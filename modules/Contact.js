@@ -9,7 +9,7 @@ class Contact {
   static async connect() {
     if (!this.client) {
       try {
-        this.client = await MongoClient.connect(process.env.Local_URI);
+        this.client = await MongoClient.connect(process.env.Server_URI);
         this.db = this.client.db("cse341");
         console.log("Connected to MongoDB");
       } catch (error) {
