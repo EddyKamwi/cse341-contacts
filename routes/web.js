@@ -108,6 +108,8 @@ const ContactsController = require("../controllers/ContactController");
  *                      application/json:
  *                          schema:
  *                             $ref: '#/components/schemas/Contact'
+ *              404:
+ *                  description: The id you provided did not match any record
  * components:
  *  schemas:
  *      Contact:
@@ -151,7 +153,7 @@ routes.get("/:id", ContactsController.show);
 routes.post("/", ContactsController.create);
 
 // UPDATE
-routes.patch("/:id", ContactsController.update);
+routes.put("/:id", ContactsController.update);
 
 // DELETE
 routes.delete("/:id", ContactsController.destroy);

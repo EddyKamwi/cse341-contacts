@@ -1,16 +1,21 @@
 const contact = require("../modules/Contact");
 
 const index = async (req, res) => {
-  const bookList = await contact.findAll();
-  res.json(bookList);
+  const list = await contact.findAll();
+  if (list === null) {
+    res.status(404).json("No contact not found!");
+  } else {
+    res.status(200).json(list);
+  }
 };
 
 const show = async (req, res) => {
   const single_contact = await contact.findById(req.params.id);
   if (single_contact === null) {
     res.status(404).json("contact not found!");
+  } else {
+    res.status(200).json(single_contact);
   }
-  res.json(single_contact);
 };
 
 const create = async (req, res) => {
@@ -18,25 +23,32 @@ const create = async (req, res) => {
   await contact
     .create(newContact)
     .then(() => res.status(200).json("The contact was created, congrats!"))
-    .catch(() => res.status(500).json("could not create a contact"));
+    .catch(() => res.status(500).json("Server Error"));
 };
 
 const destroy = async (req, res) => {
   try {
-    await contact.delete(req.params.id);
-    res.status(200).send("Contact was deleted!");
+    const num = await contact.delete(req.params.id);
+    if (num === 1) {
+      res.status(200).send("Contact was deleted!");
+    } else {
+      res.status(404).send("Contact was not found!");
+    }
   } catch (error) {
-    console.error(error);
-    res.status(404).send("contact was not found");
+    res.status(500).send("Server Error");
   }
 };
 
 const update = async (req, res) => {
   try {
-    await contact.update(req.params.id, req.body);
-    res.status(200).json(result);
+    const num = await contact.update(req.params.id, req.body);
+    if (num === 1) {
+      res.status(200).json("contact was updated!");
+    } else {
+      res.status(404).json("id did not match with any record");
+    }
   } catch (error) {
-    res.json(error+"failed to update");
+    res.json("failed to connect to server");
   }
 };
 

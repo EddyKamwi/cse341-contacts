@@ -8,8 +8,8 @@ const options = {
         "This API is interacting with a moogledb database collection of a list of contacts.",
     },
     servers: [
-      // { url: "http://localhost:8080" },
-      { url: "https://cse341-contacts-8ldi.onrender.com" },
+      { url: "http://localhost:8080" },
+      // { url: "https://cse341-contacts-8ldi.onrender.com" },
     ],
   },
   apis: ["./routes/web.js"],
