@@ -12,9 +12,8 @@ const show = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const { firstName, lastName, email, favoriteColor, birthday } = req.body;
   await contact
-    .create({ firstName, lastName, email, favoriteColor, birthday })
+    .create({ firstName: req.body })
     .then(() => res.status(200).json("The contact was created, congrats!"))
     .catch(() => res.status(500).json("could not create a contact"));
 };
