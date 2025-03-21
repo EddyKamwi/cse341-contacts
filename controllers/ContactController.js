@@ -29,10 +29,13 @@ const destroy = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  await contact
-    .update(req.params.id, req.body)
-    .then((result) => res.status(200).json(result))
-    .catch((error) => res.status(500).json(error));
+  try {
+    await contact
+      .update(req.params.id, req.body)
+      .then((result) => res.status(200).json(result));
+  } catch (error) {
+    res.json(error);
+  }
 };
 
 module.exports = { index, show, create, destroy, update };
