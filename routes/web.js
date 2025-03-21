@@ -137,8 +137,8 @@ const ContactsController = require("../controllers/ContactController");
  *          example:
  *              firstName: Joseph
  *              lastName: Smith
- *              email: josephsmith@gmail.com
- *              favoriteColor: black
+ *              email: josephsmith@celetial.being
+ *              favoriteColor: gray
  *              birthday: 23/12/1805
  *
  */
