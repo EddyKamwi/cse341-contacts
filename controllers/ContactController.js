@@ -34,7 +34,7 @@ const { ObjectId } = require('mongodb'); // Ensure ObjectId is imported
 
 const update = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id  = req.params.id;
     const updateData = req.body;
 
     // Validate ID format
