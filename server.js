@@ -3,7 +3,7 @@ async function main() {
   const contactRouter = require("./routes/web");
   const swaggerUi = require("swagger-ui-express");
   const swaggerDoc = require("swagger-jsdoc");
-  const options = require("./swagger-options");
+  const options = require("./swagger.json");
   const specs = swaggerDoc(options);
   const app = express();
 
