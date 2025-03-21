@@ -7,6 +7,9 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
   const single_contact = await contact.findById(req.params.id);
+  if (single_contact === null) {
+    res.status(404).json("contact not found!");
+  }
   res.json(single_contact);
 };
 
@@ -31,7 +34,7 @@ const destroy = async (req, res) => {
 const update = async (req, res) => {
   try {
     await contact
-      .update(req.params.id, req.body)
+      .update(req.body.id, req.body)
       .then((result) => res.status(200).json(result));
   } catch (error) {
     res.json(error);
