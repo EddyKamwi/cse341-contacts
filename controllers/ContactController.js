@@ -1,5 +1,4 @@
 const contact = require("../modules/Contact");
-require("express").json();
 
 const index = async (req, res) => {
   const bookList = await contact.findAll();
@@ -12,8 +11,9 @@ const show = async (req, res) => {
 };
 
 const create = async (req, res) => {
+  const newContact = req.body;
   await contact
-    .create({ firstName: req.body })
+    .create(newContact)
     .then(() => res.status(200).json("The contact was created, congrats!"))
     .catch(() => res.status(500).json("could not create a contact"));
 };

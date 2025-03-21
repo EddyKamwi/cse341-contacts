@@ -8,9 +8,10 @@ async function main() {
   const app = express();
 
   // loading my routes
+  app.use(express.json());
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
   app.use("/contacts", contactRouter);
-  app.use(express.json());
+  
 
   // starting server
   app.listen(8080, () => {
