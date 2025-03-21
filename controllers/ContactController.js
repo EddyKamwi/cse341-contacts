@@ -30,7 +30,7 @@ const destroy = async (req, res) => {
 
 const update = async (req, res) => {
   contact
-    .update(id, newDetails)
+    .update(req.params.id, req.body)
     .then((result) => res.status(200).json(result))
     .catch((error) => res.status(500).json(error));
 };
