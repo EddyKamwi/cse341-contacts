@@ -2,14 +2,14 @@ const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config();
 
 class Contact {
-  static client = null; 
+  static client = null;
   static db = null;
 
   // Initialize connection I could not use the class constructor because of the async required for smooth
   static async connect() {
     if (!this.client) {
       try {
-        this.client = await MongoClient.connect(process.env.Server_URI);
+        this.client = await MongoClient.connect(process.env.Local_URI);
         this.db = this.client.db("cse341");
         console.log("Connected to MongoDB");
       } catch (error) {
@@ -22,7 +22,7 @@ class Contact {
 
   // Get Contacts collection
   static async collection() {
-     // Ensure connection exists
+    // Ensure connection exists
     await this.connect();
     return this.db.collection("Contacts");
   }
@@ -40,9 +40,9 @@ class Contact {
   }
 
   // CREATE a single Contact
-  static async create(contactData) {
+  static async create(data) {
     const collection = await this.collection();
-    const result = await collection.insertOne(contactData);
+    const result = await collection.insertOne(data);
     return result.insertedId;
   }
 
