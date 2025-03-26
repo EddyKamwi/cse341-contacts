@@ -6,11 +6,11 @@ class Contact {
   static db = null;
 
   // Initialize connection I could not use the class constructor because of the async required for smooth
-  static async connect() {
+  static async connect(database = "cse341") {
     if (!this.client) {
       try {
         this.client = await MongoClient.connect(process.env.Server_URI);
-        this.db = this.client.db("cse341");
+        this.db = this.client.db(database);
         console.log("Connected to MongoDB");
       } catch (error) {
         console.error("MongoDB connection error:", error);
@@ -21,10 +21,10 @@ class Contact {
   }
 
   // Get Contacts collection
-  static async collection() {
+  static async collection(database = "cse341", collection = "Contacts") {
     // Ensure connection exists
-    await this.connect();
-    return this.db.collection("Contacts");
+    await this.connect(database);
+    return this.db.collection(collection);
   }
 
   // GET ALL Contacts
